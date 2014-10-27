@@ -17,6 +17,6 @@ class Indentor
         $lexer = new Lexer();
         $parser = new Parser();
 
-        return $parser->translate($lexer->tokenize($html));
+        return $parser->parse($lexer->tokenize($html));
     }
 }

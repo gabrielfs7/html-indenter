@@ -18,7 +18,7 @@ class Parser
      * @throws \Exception
      * @return string
      */
-    public function translate($html)
+    public function parse($html)
     {
         $outputHtml = "";
         $indentLevel = 0;
@@ -49,7 +49,7 @@ class Parser
             $indentLevel = $nextIndentLevel;
         }
 
-        return $outputHtml;
+        return trim($outputHtml);
     }
 
 
