@@ -8,6 +8,9 @@
             "email": "jean.gnc@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=5.5.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "4.3.*@dev",
         "phpunit/phpunit-mock-objects": "2.3.*@dev",

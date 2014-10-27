@@ -14,40 +14,9 @@ class Indentor
      */
     public function indent($html)
     {
-        return $this->translate($this->tokenize($html));
-    }
+        $lexer = new Lexer();
+        $parser = new Parser();
 
-    /**
-     * @param string $html
-     * @return string
-     */
-    private function tokenize($html)
-    {
-        $tokenizer = new Tokenizer();
-
-        return $tokenizer->tokenize($this->cleanupSpaces($html));
-    }
-
-    /**
-     * @param string $html
-     * @return string
-     */
-    private function translate($html)
-    {
-        $translator = new TokenTranslator();
-
-        return $translator->translate($html);
-    }
-
-    /**
-     * @param string $html
-     * @return string
-     */
-    private function cleanupSpaces($html)
-    {
-        $html = preg_replace("/([ ]{2,})/i", " ", $html);
-        $html = preg_replace("/(\n|\t)/i", "", $html);
-
-        return $html;
+        return $parser->translate($lexer->tokenize($html));
     }
 }

@@ -2,15 +2,14 @@
 
 namespace Indentor;
 
+use Indentor\Lexer\Token;
 use Indentor\Exception\NegativeIndentationLevelException;
 use Indentor\Exception\UnknownTokenException;
 
 /**
  * @package Indentor
- *
- * TODO test
  */
-class TokenTranslator
+class Parser
 {
     private $indentString = '    ';
 
@@ -24,7 +23,7 @@ class TokenTranslator
         $outputHtml = "";
         $indentLevel = 0;
 
-        foreach (explode(PHP_EOL, $html) as $lineContent) {
+        foreach (explode(Token::LINE_SEPARATOR, $html) as $lineContent) {
             $token = substr($lineContent, 0, 1);
             $lineContent = trim(substr($lineContent, 1));
 
@@ -35,7 +34,7 @@ class TokenTranslator
             $nextIndentLevel = $indentLevel;
 
             try {
-                $nextIndentLevel = $this->getIndentLevelByToken($indentLevel, $token);
+                $nextIndentLevel = $this->changeIndentLevelByToken($indentLevel, $token);
 
             } catch (UnknownTokenException $exception) {
                 //TODO and now?
@@ -61,18 +60,18 @@ class TokenTranslator
      * @throws NegativeIndentationLevelException
      * @return string
      */
-    private function getIndentLevelByToken($indentLevel, $token)
+    private function changeIndentLevelByToken($indentLevel, $token)
     {
         switch ($token) {
-            case Tokenizer::TOKEN_INCREASE:
+            case Token::TOKEN_INCREASE:
                 $indentLevel++;
                 break;
 
-            case Tokenizer::TOKEN_DECREASE:
+            case Token::TOKEN_DECREASE:
                 $indentLevel--;
                 break;
 
-            case Tokenizer::TOKEN_EQUALS:
+            case Token::TOKEN_EQUALS:
                 break;
 
             default:

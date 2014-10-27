@@ -2,18 +2,20 @@
 
 namespace Indentor;
 
+use Indentor\Lexer\Token;
+use Indentor\Html\WhiteSpaceRemover;
+
 /**
  * @package Indentor
  *
- * TODO test
  */
-class Tokenizer
+class Lexer
 {
-    const TOKEN_INCREASE = '+';
-    const TOKEN_DECREASE = '-';
-    const TOKEN_EQUALS = '=';
 
-
+    /**
+     * This tags will be put each in your own line.
+     * @var array
+     */
     private $inlineTags = [
         'b', 'big', 'i', 'tt', 'abbr', 'acronym', 'cite', 'code',
         'dfn', 'em', 'kbd', 'strong', 'samp', 'var', 'bdo', 'br',
@@ -21,29 +23,39 @@ class Tokenizer
         '!--', '--', 'iframe', 'button'
     ];
 
+    /**
+     * This tags will be simply ignored.
+     * @var array
+     */
     private $ignoredTags = [
         'img', 'input', 'small', 'del'
     ];
 
     /**
-     * Replace blocks for a structure easier to parse
+     * @param string $html
+     * @return string
      */
     public function tokenize($html)
     {
-        $html = $this->tokenizeOpenBlocks($html);
-        $html = $this->tokenizeCloseBlocks($html);
-        $html = $this->tokenizeOpenInlineElements($html);
+        $whiteSpaceRemover = new WhiteSpaceRemover();
 
-        return $html;
+        $inlineHtml = $whiteSpaceRemover->removeWhiteSpaces($html);
+        $inlineHtml = $this->tokenizeOpenBlocks($inlineHtml);
+        $inlineHtml = $this->tokenizeCloseBlocks($inlineHtml);
+        $inlineHtml = $this->tokenizeOpenInlineElements($inlineHtml);
+
+        return $inlineHtml;
     }
 
     /**
      * @param string $html
      * @return string
+     *
+     * TODO refactory
      */
     private function tokenizeOpenBlocks($html)
     {
-        $token = PHP_EOL . self::TOKEN_INCREASE . "$0" . PHP_EOL . self::TOKEN_EQUALS;
+        $token = PHP_EOL . Token::TOKEN_INCREASE . "$0" . PHP_EOL . Token::TOKEN_EQUALS;
 
         $elementsRegexp = $this->createTagsRegexp(
             array_merge($this->inlineTags, $this->ignoredTags)
@@ -58,10 +70,12 @@ class Tokenizer
     /**
      * @param string $html
      * @return string
+     *
+     * TODO refactory
      */
     private function tokenizeCloseBlocks($html)
     {
-        $token = PHP_EOL . self::TOKEN_DECREASE . "$0" . PHP_EOL . self::TOKEN_EQUALS;
+        $token = PHP_EOL . Token::TOKEN_DECREASE . "$0" . PHP_EOL . Token::TOKEN_EQUALS;
 
         $elementsRegexp = $this->createTagsRegexp(
             array_merge($this->inlineTags, $this->ignoredTags)
@@ -76,10 +90,12 @@ class Tokenizer
     /**
      * @param string $html
      * @return string
+     *
+     * TODO refactory
      */
     private function tokenizeOpenInlineElements($html)
     {
-        $token = PHP_EOL . self::TOKEN_EQUALS . "$0";
+        $token = PHP_EOL . Token::TOKEN_EQUALS . "$0";
 
         $html = preg_replace("#<(" . implode('|', $this->inlineTags) . ")( [^>]*)?[/]?>#i", $token, $html);
 
