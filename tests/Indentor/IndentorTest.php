@@ -1,11 +1,11 @@
 <?php
 
-namespace Indentor;
+namespace Indenter;
 
 /**
- * @package Indentor
+ * @package Indenter
  */
-class IndentorTest extends \PHPUnit_Framework_TestCase
+class IndenterTest extends \PHPUnit_Framework_TestCase
 {
 
 }

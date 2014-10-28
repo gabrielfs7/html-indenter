@@ -1,9 +1,9 @@
 <?php
 
-namespace Indentor\Html;
+namespace Indenter\Html;
 
 /**
- * @package Indentor\Html
+ * @package Indenter\Html
  */
 class WhiteSpaceRemoverTest extends \PHPUnit_Framework_TestCase
 {

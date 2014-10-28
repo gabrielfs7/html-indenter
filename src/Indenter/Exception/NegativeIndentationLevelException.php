@@ -1,9 +1,9 @@
 <?php
 
-namespace Indentor\Exception;
+namespace Indenter\Exception;
 
 /**
- * @package Indentor\Exception
+ * @package Indenter\Exception
  */
 class NegativeIndentationLevelException extends \Exception
 {

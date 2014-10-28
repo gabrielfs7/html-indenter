@@ -1,11 +1,11 @@
 <?php
 
-namespace Indentor;
+namespace Indenter;
 
 /**
- * @package Indentor
+ * @package Indenter
  */
-class Indentor
+class Indenter
 {
 
     /**

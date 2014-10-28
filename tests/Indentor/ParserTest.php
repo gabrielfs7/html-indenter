@@ -1,9 +1,9 @@
 <?php
 
-namespace Indentor;
+namespace Indenter;
 
 /**
- * @package Indentor
+ * @package Indenter
  */
 class ParserTest extends \PHPUnit_Framework_TestCase
 {

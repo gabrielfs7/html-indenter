@@ -1,12 +1,12 @@
 <?php
 
-namespace Indentor;
+namespace Indenter;
 
-use Indentor\Lexer\Token;
-use Indentor\Html\WhiteSpaceRemover;
+use Indenter\Lexer\Token;
+use Indenter\Html\WhiteSpaceRemover;
 
 /**
- * @package Indentor
+ * @package Indenter
  *
  */
 class Lexer

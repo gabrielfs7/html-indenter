@@ -1,10 +1,10 @@
 <?php
 
-namespace Indentor\Lexer;
+namespace Indenter\Lexer;
 
 
 /**
- * @package Indentor\Lexer
+ * @package Indenter\Lexer
  */
 class Token
 {

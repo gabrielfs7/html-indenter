@@ -1,13 +1,13 @@
 <?php
 
-namespace Indentor;
+namespace Indenter;
 
-use Indentor\Lexer\Token;
-use Indentor\Exception\NegativeIndentationLevelException;
-use Indentor\Exception\UnknownTokenException;
+use Indenter\Lexer\Token;
+use Indenter\Exception\NegativeIndentationLevelException;
+use Indenter\Exception\UnknownTokenException;
 
 /**
- * @package Indentor
+ * @package Indenter
  */
 class Parser
 {

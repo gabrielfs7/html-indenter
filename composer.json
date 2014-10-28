@@ -18,7 +18,7 @@
         "squizlabs/php_codesniffer": "dev-master"
     },
     "autoload": {
-        "psr-0": {"Indentor": "src"}
+        "psr-0": {"Indenter": "src"}
     },
     "config": {
         "bin-dir": "bin",
